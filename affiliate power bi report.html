@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Affiliate Report Dashboard</title>
+    <style>
+        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background-color: #f4f4f4; font-family: sans-serif; }
+        #login-container { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
+        .login-box { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: center; }
+        input { padding: 10px; width: 200px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 4px; }
+        button { padding: 10px 20px; background-color: #f2c811; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
+        button:hover { background-color: #dcb60f; }
+        #report-container { display: none; width: 100%; height: 100vh; }
+    </style>
+</head>
+<body>
+
+    <div id="login-container">
+        <div class="login-box">
+            <h2>Please enter the password:</h2>
+            <input type="password" id="password-input" placeholder="输入密码...">
+            <br>
+            <button onclick="checkPassword()">Enter</button>
+            <p id="error-msg" style="color: red; display: none;">Wrong password. Please try again.</p>
+        </div>
+    </div>
+
+    <div id="report-container">
+        <iframe title="Your Report Name" width="100%" height="100%" src="https://app.powerbi.com/view?r=eyJrIjoiYTgxNTgxYjAtNTliZi00MmM1LWE1YTUtZmE2NDI1Zjg5ZmZlIiwidCI6ImNkZTY2NzdiLTVjYjYtNDY5ZC05MjQyLTk1MTg5NWFkNGNhOCJ9" frameborder="0" allowFullScreen="true"></iframe>
+    </div>
+
+    <script>
+        function checkPassword() {
+            const pass = document.getElementById('password-input').value;
+            const correctPass = "AffPlaud2026!"; // <--- 在这里设置你的自定义密码
+
+            if (pass === correctPass) {
+                document.getElementById('login-container').style.display = 'none';
+                document.getElementById('report-container').style.display = 'block';
+            } else {
+                document.getElementById('error-msg').style.display = 'block';
+            }
+        }
+
+        // 支持回车键提交
+        document.getElementById('password-input').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                checkPassword();
+            }
+        });
+    </script>
+</body>
+</html>
